@@ -55,7 +55,6 @@ namespace Fall2020_CSC403_Project
             boostChar = new Character(CreatePosition(boostBox), CreateCollider(boostBox, 7));
             panelBox = Controls.Find("panel1",true)[0] as Panel;
             labelBox = Controls.Find("label1", true)[0] as Label;
-
             Game.player = player;
             timeBegin = DateTime.Now;
         }
@@ -92,6 +91,7 @@ namespace Fall2020_CSC403_Project
             // check collision with walls
             if (HitAWall(player))
             {
+                labelBox.Text = "Wall Collision";
                 player.MoveBack();
             }
 
@@ -100,6 +100,7 @@ namespace Fall2020_CSC403_Project
             // check collision with enemies
             if (HitAChar(player, enemyPoisonPacket) && !picEnemyPoisonPacket.IsDisposed)
             {
+                labelBox.Text = "Fight Against Poison";
                 Fight(enemyPoisonPacket);
             }
             if (HitAChar(player, enemyCheeto) && !picEnemyCheeto.IsDisposed)
@@ -111,7 +112,8 @@ namespace Fall2020_CSC403_Project
                 Fight(bossKoolaid);
             }
             if (boostChar != null && HitBoost(player, boost) && !boost.IsDisposed) {
-                SoundPlayer simpleSound = new SoundPlayer(Resources.health_consume);
+                labelBox.Text = "Health Packet Consumed";
+                SoundPlayer simpleSound = new SoundPlayer(Resources.final_battle);
                 simpleSound.Play();
                 UpdatePlayerHealth(player);
                 boost.Dispose();
