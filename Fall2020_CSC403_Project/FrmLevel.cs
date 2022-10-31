@@ -16,12 +16,14 @@ namespace Fall2020_CSC403_Project
         private Enemy enemyCheeto;
         private Character[] walls;
         private Character boostChar;
+        private Character boostChar2;
 
         private DateTime timeBegin;
         private FrmBattle frmBattle;
         Panel panelBox;
         Label labelBox;
         PictureBox boostBox;
+        PictureBox boostBox2;
         String defText = "Recent Updates are : \n";
 
         bool displayRestart = true;
@@ -56,7 +58,9 @@ namespace Fall2020_CSC403_Project
             }
 
             boostBox = Controls.Find("boost", true)[0] as PictureBox;
+            boostBox2 = Controls.Find("pictureBox4", true)[0] as PictureBox;
             boostChar = new Character(CreatePosition(boostBox), CreateCollider(boostBox, 7));
+            boostChar2 = new Character(CreatePosition(boostBox2), CreateCollider(boostBox2, 7));
             panelBox = Controls.Find("panel1", true)[0] as Panel;
             labelBox = Controls.Find("label1", true)[0] as Label;
             Game.player = player;
@@ -118,13 +122,26 @@ namespace Fall2020_CSC403_Project
                     labelBox.Text = defText + "Fight Against Boss";
                     Fight(bossKoolaid);
                 }
-                if (boostChar != null && HitBoost(player, boost) && !boost.IsDisposed)
+                if (!boost.IsDisposed && picEnemyPoisonPacket.IsDisposed) {
+                    boostBox.Visible = true;
+                    boostBox.Enabled = true;
+                }
+                if (HitBoost(player) && !boost.IsDisposed && picEnemyPoisonPacket.IsDisposed)
                 {
-                    labelBox.Text = defText + "Health Packet Consumed and incresed health";
-                    SoundPlayer simpleSound = new SoundPlayer(Resources.final_battle);
-                    simpleSound.Play();
+                    labelBox.Text = defText + "Health increased by 6";
                     UpdatePlayerHealth(player);
                     boost.Dispose();
+                }
+                if (!pictureBox4.IsDisposed && picEnemyCheeto.IsDisposed)
+                {
+                    boostBox2.Visible = true;
+                    boostBox2.Enabled = true;
+                }
+                if (HitBoost2(player) && !pictureBox4.IsDisposed && picEnemyCheeto.IsDisposed)
+                {
+                    labelBox.Text = defText + "Health increased by 6";
+                    UpdatePlayerHealth(player);
+                    pictureBox4.Dispose();
                 }
                 if (player.Health <= 0 && !picPlayer.IsDisposed)
                 {
@@ -155,6 +172,8 @@ namespace Fall2020_CSC403_Project
                     picBossKoolAid.Dispose();
                 }
 
+
+
                 if ((enemyPoisonPacket.Health <= 0 && enemyCheeto.Health <= 0 && bossKoolaid.Health <= 0) || player.Health <= 0)
                 {
                     displayRestart = false;
@@ -163,6 +182,7 @@ namespace Fall2020_CSC403_Project
                     pictureBox3.Visible = true;
                     pictureBox3.Enabled = true;
                 }
+
             }
          
 
@@ -174,10 +194,16 @@ namespace Fall2020_CSC403_Project
             player.AlterHealth(12);
         }
 
-        private bool HitBoost(Player player, PictureBox boost)
+        private bool HitBoost(Player player)
         {
             return player.Collider.Intersects(boostChar.Collider);
         }
+
+        private bool HitBoost2(Player player)
+        {
+            return player.Collider.Intersects(boostChar2.Collider);
+        }
+
 
         private bool HitAWall(Character c)
         {
@@ -249,6 +275,7 @@ namespace Fall2020_CSC403_Project
             label1.Text = defText + " Restarting the Game";
             MouseEventArgs me = (MouseEventArgs)e;
             Point coordinates = me.Location;
+            Console.WriteLine(coordinates.X + "   " + coordinates.Y);
             if (coordinates.X > 45 && coordinates.X < 90 && coordinates.Y > 50 && coordinates.Y <= 90)
             {
                 Application.Restart();
@@ -260,15 +287,16 @@ namespace Fall2020_CSC403_Project
         {
             MouseEventArgs me = (MouseEventArgs)e;
             Point coordinates = me.Location;
-            if (241 < coordinates.X && coordinates.X < 349 && 138 < coordinates.Y && coordinates.Y < 187)
+            Console.WriteLine(coordinates.X + "   " + coordinates.Y);
+            if ( coordinates.X > 62 && coordinates.X < 111 && coordinates.Y > 56 && coordinates.Y < 67)
             {
                 // nothing to do normal gameplay using defaults
             }
-            else if (241 < coordinates.X && coordinates.X < 349 && 138 < coordinates.Y && coordinates.Y < 187)
+            else if ( coordinates.X > 62 && coordinates.X < 111 && coordinates.Y > 75 && coordinates.Y < 89)
             {
                 increaseDifficultyMedium(10);
             }
-            else if (241 < coordinates.X && coordinates.X < 349 && 138 < coordinates.Y && coordinates.Y < 187)
+            else if (coordinates.X > 62 && coordinates.X < 111 &&  coordinates.Y > 97 && coordinates.Y < 111)
             {
 
                 increaseDifficultyHard(15);
@@ -286,13 +314,28 @@ namespace Fall2020_CSC403_Project
 
         private void increaseDifficultyHard(int health)
         {
-            
+            //bossKoolaid.MaxHealth =+ health;
+            //enemyCheeto.MaxHealth =+ health;
+            //enemyCheeto.MaxHealth =+ health;
+            //bossKoolaid.Health = +health;
+            //enemyCheeto.Health = +health;
+            //enemyCheeto.Health = +health;
+            bossKoolaid.strength = 3;
+            player.GO_INC = 2;
 
         }
 
         private void increaseDifficultyMedium(int health)
         {
-           
+            //bossKoolaid.MaxHealth =+ health;
+            //enemyCheeto.MaxHealth =+ health;
+            //enemyCheeto.MaxHealth =+ health;
+            //bossKoolaid.Health = +health;
+            //enemyCheeto.Health = +health;
+            //enemyCheeto.Health = +health;
+            bossKoolaid.strength = 2.5f;
+            player.GO_INC = 3;
+
         }
 
         private void pictureBox3_Click(object sender, EventArgs e)

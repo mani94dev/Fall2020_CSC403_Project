@@ -16,9 +16,9 @@ namespace Fall2020_CSC403_Project.code {
         /// this is the background color for the fight form for this enemy
         /// </summary>
         public Color Color { get; set; }
-        public int Health { get; private set; }
-    public int MaxHealth { get; private set; }
-    private float strength;
+        public int Health { get; set; }
+    public int MaxHealth { get; set; }
+    public float strength;
 
     public event Action<int> AttackEvent;
 
