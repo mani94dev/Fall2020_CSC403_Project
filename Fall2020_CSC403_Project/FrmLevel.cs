@@ -22,6 +22,10 @@ namespace Fall2020_CSC403_Project
         Panel panelBox;
         Label labelBox;
         PictureBox boostBox;
+        String defText = "Recent Updates are : \n";
+
+        bool displayRestart = true;
+        bool displayMenuDifficult = false;
         public FrmLevel()
         {
             InitializeComponent();
@@ -53,7 +57,7 @@ namespace Fall2020_CSC403_Project
 
             boostBox = Controls.Find("boost", true)[0] as PictureBox;
             boostChar = new Character(CreatePosition(boostBox), CreateCollider(boostBox, 7));
-            panelBox = Controls.Find("panel1",true)[0] as Panel;
+            panelBox = Controls.Find("panel1", true)[0] as Panel;
             labelBox = Controls.Find("label1", true)[0] as Label;
             Game.player = player;
             timeBegin = DateTime.Now;
@@ -84,82 +88,94 @@ namespace Fall2020_CSC403_Project
 
         private void tmrPlayerMove_Tick(object sender, EventArgs e)
         {
+            if (displayRestart)
+            {
+                // move player
+                player.Move();
 
-            // move player
-            player.Move();
-
-            // check collision with walls
-            if (HitAWall(player))
-            {
-                labelBox.Text = "Wall Collision";
-                player.MoveBack();
-            }
+                // check collision with walls
+                if (HitAWall(player))
+                {
+                    labelBox.Text = defText + "Wall Collision";
+                    player.MoveBack();
+                }
 
 
 
-            // check collision with enemies
-            if (HitAChar(player, enemyPoisonPacket) && !picEnemyPoisonPacket.IsDisposed)
-            {
-                labelBox.Text = "Fight Against Poison";
-                Fight(enemyPoisonPacket);
+                // check collision with enemies
+                if (HitAChar(player, enemyPoisonPacket) && !picEnemyPoisonPacket.IsDisposed)
+                {
+                    labelBox.Text = defText + "Fight Against Poison";
+                    Fight(enemyPoisonPacket);
+                }
+                if (HitAChar(player, enemyCheeto) && !picEnemyCheeto.IsDisposed)
+                {
+                    labelBox.Text = defText + "Fight Against Cheeto";
+                    Fight(enemyCheeto);
+                }
+                if (HitAChar(player, bossKoolaid) && !picBossKoolAid.IsDisposed)
+                {
+                    labelBox.Text = defText + "Fight Against Boss";
+                    Fight(bossKoolaid);
+                }
+                if (boostChar != null && HitBoost(player, boost) && !boost.IsDisposed)
+                {
+                    labelBox.Text = defText + "Health Packet Consumed and incresed health";
+                    SoundPlayer simpleSound = new SoundPlayer(Resources.final_battle);
+                    simpleSound.Play();
+                    UpdatePlayerHealth(player);
+                    boost.Dispose();
+                }
+                if (player.Health <= 0 && !picPlayer.IsDisposed)
+                {
+                    picPlayer.Visible = false;
+                    picPlayer.Enabled = false;
+                    picPlayer.Dispose();
+                }
+                else
+                {
+                    picPlayer.Location = new Point((int)player.Position.x, (int)player.Position.y);
+                }
+                if (enemyPoisonPacket.Health <= 0 && !picEnemyPoisonPacket.IsDisposed)
+                {
+                    picEnemyPoisonPacket.Visible = false;
+                    picEnemyPoisonPacket.Enabled = false;
+                    picEnemyPoisonPacket.Dispose();
+                }
+                if (enemyCheeto.Health <= 0 && !picEnemyCheeto.IsDisposed)
+                {
+                    picEnemyCheeto.Visible = false;
+                    picEnemyCheeto.Enabled = false;
+                    picEnemyCheeto.Dispose();
+                }
+                if (bossKoolaid.Health <= 0 && !picBossKoolAid.IsDisposed)
+                {
+                    picBossKoolAid.Visible = false;
+                    picBossKoolAid.Enabled = false;
+                    picBossKoolAid.Dispose();
+                }
+
+                if ((enemyPoisonPacket.Health <= 0 && enemyCheeto.Health <= 0 && bossKoolaid.Health <= 0) || player.Health <= 0)
+                {
+                    displayRestart = false;
+                    pictureBox1.Visible = true;
+                    pictureBox1.Enabled = true;
+                }
             }
-            if (HitAChar(player, enemyCheeto) && !picEnemyCheeto.IsDisposed)
-            {
-                labelBox.Text = "Fight Against Cheeto";
-                Fight(enemyCheeto);
-            }
-            if (HitAChar(player, bossKoolaid) && !picBossKoolAid.IsDisposed)
-            {
-                labelBox.Text = "Fight Against Boss";
-                Fight(bossKoolaid);
-            }
-            if (boostChar != null && HitBoost(player, boost) && !boost.IsDisposed) {
-                labelBox.Text = "Health Packet Consumed";
-                SoundPlayer simpleSound = new SoundPlayer(Resources.final_battle);
-                simpleSound.Play();
-                UpdatePlayerHealth(player);
-                boost.Dispose();
-            }
-            if (player.Health <= 0 && !picPlayer.IsDisposed)
-            {
-                picPlayer.Visible = false;
-                picPlayer.Enabled = false;
-                picPlayer.Dispose();
-            }
-            else {
-                picPlayer.Location = new Point((int)player.Position.x, (int)player.Position.y);
-            }
-            if (enemyPoisonPacket.Health <= 0 && !picEnemyPoisonPacket.IsDisposed)
-            {
-                picEnemyPoisonPacket.Visible = false;
-                picEnemyPoisonPacket.Enabled = false;
-                picEnemyPoisonPacket.Dispose();
-            }
-            if (enemyCheeto.Health <= 0 && !picEnemyCheeto.IsDisposed)
-            {
-                picEnemyCheeto.Visible = false;
-                picEnemyCheeto.Enabled = false;
-                picEnemyCheeto.Dispose();
-            }
-            if (bossKoolaid.Health <= 0 && !picBossKoolAid.IsDisposed) {
-                picBossKoolAid.Visible = false;
-                picBossKoolAid.Enabled = false;
-                picBossKoolAid.Dispose();
-            }
+         
 
 
         }
 
-            private void UpdatePlayerHealth(Player player)
-            {
-                labelBox.Text = "Increasing health";
-                player.AlterHealth(12);
-            }
+        private void UpdatePlayerHealth(Player player)
+        {
+            player.AlterHealth(12);
+        }
 
-            private bool HitBoost(Player player, PictureBox boost)
-            {
-                return player.Collider.Intersects(boostChar.Collider);
-            }
+        private bool HitBoost(Player player, PictureBox boost)
+        {
+            return player.Collider.Intersects(boostChar.Collider);
+        }
 
         private bool HitAWall(Character c)
         {
@@ -192,7 +208,7 @@ namespace Fall2020_CSC403_Project
                 frmBattle.SetupForBossBattle();
             }
 
-            
+
         }
 
         private void FrmLevel_KeyDown(object sender, KeyEventArgs e)
@@ -226,9 +242,54 @@ namespace Fall2020_CSC403_Project
 
         }
 
-        private void boost_Click(object sender, EventArgs e)
+        private void pictureBox1_Click(object sender, EventArgs e)
         {
+            label1.Text = defText + " Restarting the Game";
+            MouseEventArgs me = (MouseEventArgs)e;
+            Point coordinates = me.Location;
+            if (coordinates.X > 45 && coordinates.X < 90 && coordinates.Y > 50 && coordinates.Y <= 90)
+            {
+                Application.Restart();
+            }
 
+        }
+
+        private void pictureBox2_Click(object sender, EventArgs e)
+        {
+            MouseEventArgs me = (MouseEventArgs)e;
+            Point coordinates = me.Location;
+            if (241 < coordinates.X && coordinates.X < 349 && 138 < coordinates.Y && coordinates.Y < 187)
+            {
+                // nothing to do normal gameplay using defaults
+            }
+            else if (241 < coordinates.X && coordinates.X < 349 && 138 < coordinates.Y && coordinates.Y < 187)
+            {
+                increaseDifficultyMedium(10);
+            }
+            else if (241 < coordinates.X && coordinates.X < 349 && 138 < coordinates.Y && coordinates.Y < 187)
+            {
+
+                increaseDifficultyHard(15);
+            }
+
+            pictureBox2.Enabled = false;
+            pictureBox2.Visible = false;
+            pictureBox2.Dispose();
+
+
+
+
+        }
+
+        private void increaseDifficultyHard(int health)
+        {
+            
+
+        }
+
+        private void increaseDifficultyMedium(int health)
+        {
+           
         }
     }
 }
