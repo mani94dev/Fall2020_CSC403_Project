@@ -88,7 +88,7 @@ namespace Fall2020_CSC403_Project
 
         private void tmrPlayerMove_Tick(object sender, EventArgs e)
         {
-            if (displayRestart)
+            if (displayMenuDifficult)
             {
                 // move player
                 player.Move();
@@ -160,6 +160,8 @@ namespace Fall2020_CSC403_Project
                     displayRestart = false;
                     pictureBox1.Visible = true;
                     pictureBox1.Enabled = true;
+                    pictureBox3.Visible = true;
+                    pictureBox3.Enabled = true;
                 }
             }
          
@@ -275,6 +277,7 @@ namespace Fall2020_CSC403_Project
             pictureBox2.Enabled = false;
             pictureBox2.Visible = false;
             pictureBox2.Dispose();
+            displayMenuDifficult = true;
 
 
 
@@ -290,6 +293,14 @@ namespace Fall2020_CSC403_Project
         private void increaseDifficultyMedium(int health)
         {
            
+        }
+
+        private void pictureBox3_Click(object sender, EventArgs e)
+        {
+            label1.Text = defText + " Closing the Game";
+            Close();
+            
+
         }
     }
 }
