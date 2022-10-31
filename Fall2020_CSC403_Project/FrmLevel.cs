@@ -105,10 +105,12 @@ namespace Fall2020_CSC403_Project
             }
             if (HitAChar(player, enemyCheeto) && !picEnemyCheeto.IsDisposed)
             {
+                labelBox.Text = "Fight Against Cheeto";
                 Fight(enemyCheeto);
             }
             if (HitAChar(player, bossKoolaid) && !picBossKoolAid.IsDisposed)
             {
+                labelBox.Text = "Fight Against Boss";
                 Fight(bossKoolaid);
             }
             if (boostChar != null && HitBoost(player, boost) && !boost.IsDisposed) {
@@ -148,15 +150,16 @@ namespace Fall2020_CSC403_Project
 
         }
 
-        private void UpdatePlayerHealth(Player player)
-        {
-            player.AlterHealth(12);
-        }
+            private void UpdatePlayerHealth(Player player)
+            {
+                labelBox.Text = "Increasing health";
+                player.AlterHealth(12);
+            }
 
-        private bool HitBoost(Player player, PictureBox boost)
-        {
-            return player.Collider.Intersects(boostChar.Collider);
-        }
+            private bool HitBoost(Player player, PictureBox boost)
+            {
+                return player.Collider.Intersects(boostChar.Collider);
+            }
 
         private bool HitAWall(Character c)
         {
