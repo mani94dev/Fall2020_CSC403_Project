@@ -29,6 +29,7 @@ namespace Fall2020_CSC403_Project
 
         bool displayRestart = true;
         bool displayMenuDifficult = false;
+        public String theme;
         public FrmLevel()
         {
             InitializeComponent();
@@ -89,6 +90,18 @@ namespace Fall2020_CSC403_Project
             for (int w = 0; w < NUM_WALLS; w++)
             {
                 PictureBox pic = Controls.Find("picWall" + w.ToString(), true)[0] as PictureBox;
+                if (theme == "theme1")
+                {
+                    pic.BackgroundImage = Resources.brick_wall_1;
+                }
+                else if (theme == "theme2")
+                {
+                    pic.BackgroundImage = Resources.brick_Wall_2;
+                }
+                else
+                {
+                    pic.BackgroundImage = Resources.wall;
+                }
                 walls[w] = new Character(CreatePosition(pic), CreateCollider(pic, PADDING));
             }
 

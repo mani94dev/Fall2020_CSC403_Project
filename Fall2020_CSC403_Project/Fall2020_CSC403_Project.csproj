@@ -54,11 +54,11 @@
     <Compile Include="LoseScreen.Designer.cs">
       <DependentUpon>LoseScreen.cs</DependentUpon>
     </Compile>
-    <Compile Include="modeSelection.cs">
+    <Compile Include="ThemeSelection.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="modeSelection.Designer.cs">
-      <DependentUpon>modeSelection.cs</DependentUpon>
+    <Compile Include="ThemeSelection.Designer.cs">
+      <DependentUpon>ThemeSelection.cs</DependentUpon>
     </Compile>
     <Compile Include="Options.cs">
       <SubType>Form</SubType>
@@ -100,6 +100,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="LoseScreen.resx">
       <DependentUpon>LoseScreen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ThemeSelection.resx">
+      <DependentUpon>ThemeSelection.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -227,6 +230,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="data\WinScreenPicture.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="data\brick-wall-1.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="data\brick-Wall-2.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

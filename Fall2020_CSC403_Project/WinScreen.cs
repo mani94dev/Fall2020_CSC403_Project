@@ -12,7 +12,7 @@ namespace Fall2020_CSC403_Project
 {
     public partial class WinScreen : Form
     {
-        public modeSelection modes;
+        public ThemeSelection modes;
         public FrmLevel frmLevel;
         public WinScreen()
         {
