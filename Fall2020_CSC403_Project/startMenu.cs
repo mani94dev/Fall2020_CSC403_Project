@@ -35,7 +35,7 @@ namespace Fall2020_CSC403_Project
 
         private void Start_MouseClick(object sender, MouseEventArgs e)
         {
-            modeSelection mode = new modeSelection();
+            ThemeSelection mode = new ThemeSelection();
             mode.Show();
             this.Hide();
         }

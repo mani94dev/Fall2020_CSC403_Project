@@ -56,6 +56,18 @@ namespace Fall2020_CSC403_Project
             for (int w = 0; w < NUM_WALLS; w++)
             {
                 PictureBox pic = Controls.Find("picWall" + w.ToString(), true)[0] as PictureBox;
+                if (theme == "theme1")
+                {
+                    pic.BackgroundImage = Resources.brick_Wall_2;
+                }
+                else if (theme == "theme2")
+                {
+                    pic.BackgroundImage = Resources.brick_wall_1;
+                }
+                else
+                {
+                    pic.BackgroundImage = Resources.wall;
+                }
                 walls[w] = new Character(CreatePosition(pic), CreateCollider(pic, PADDING));
             }
 
@@ -92,11 +104,11 @@ namespace Fall2020_CSC403_Project
                 PictureBox pic = Controls.Find("picWall" + w.ToString(), true)[0] as PictureBox;
                 if (theme == "theme1")
                 {
-                    pic.BackgroundImage = Resources.brick_wall_1;
+                    pic.BackgroundImage = Resources.brick_Wall_2;
                 }
                 else if (theme == "theme2")
                 {
-                    pic.BackgroundImage = Resources.brick_Wall_2;
+                    pic.BackgroundImage = Resources.brick_wall_1;
                 }
                 else
                 {
@@ -232,14 +244,14 @@ namespace Fall2020_CSC403_Project
 
 
 
-                if ((enemyPoisonPacket.Health <= 0 && enemyCheeto.Health <= 0 && bossKoolaid.Health <= 0) || player.Health <= 0)
-                {
-                    displayRestart = false;
-                    pictureBox1.Visible = true;
-                    pictureBox1.Enabled = true;
-                    pictureBox3.Visible = true;
-                    pictureBox3.Enabled = true;
-                }
+                //if ((enemyPoisonPacket.Health <= 0 && enemyCheeto.Health <= 0 && bossKoolaid.Health <= 0) || player.Health <= 0)
+                //{
+                //    displayRestart = false;
+                //    pictureBox1.Visible = true;
+                //    pictureBox1.Enabled = true;
+                //    pictureBox3.Visible = true;
+                //    pictureBox3.Enabled = true;
+                //}
 
             }
          
