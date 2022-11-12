@@ -9,6 +9,7 @@ namespace Fall2020_CSC403_Project
 {
     public partial class FrmLevel : Form
     {
+        public static FrmLevel instance = null;
         private Player player;
 
         private Enemy enemyPoisonPacket;
@@ -65,6 +66,50 @@ namespace Fall2020_CSC403_Project
             labelBox = Controls.Find("label1", true)[0] as Label;
             Game.player = player;
             timeBegin = DateTime.Now;
+        }
+
+        private void FrmLevel_Load()
+        {
+            const int PADDING = 7;
+            const int NUM_WALLS = 13;
+
+            player = new Player(CreatePosition(picPlayer), CreateCollider(picPlayer, PADDING));
+            bossKoolaid = new Enemy(CreatePosition(picBossKoolAid), CreateCollider(picBossKoolAid, PADDING));
+            enemyPoisonPacket = new Enemy(CreatePosition(picEnemyPoisonPacket), CreateCollider(picEnemyPoisonPacket, PADDING));
+            enemyCheeto = new Enemy(CreatePosition(picEnemyCheeto), CreateCollider(picEnemyCheeto, PADDING));
+            bossKoolaid.Img = picBossKoolAid.BackgroundImage;
+            enemyPoisonPacket.Img = picEnemyPoisonPacket.BackgroundImage;
+            enemyCheeto.Img = picEnemyCheeto.BackgroundImage;
+
+            bossKoolaid.Color = Color.Red;
+            enemyPoisonPacket.Color = Color.Green;
+            enemyCheeto.Color = Color.FromArgb(255, 245, 161);
+
+            walls = new Character[NUM_WALLS];
+            for (int w = 0; w < NUM_WALLS; w++)
+            {
+                PictureBox pic = Controls.Find("picWall" + w.ToString(), true)[0] as PictureBox;
+                walls[w] = new Character(CreatePosition(pic), CreateCollider(pic, PADDING));
+            }
+
+            boostBox = Controls.Find("boost", true)[0] as PictureBox;
+            boostBox2 = Controls.Find("pictureBox4", true)[0] as PictureBox;
+            boostChar = new Character(CreatePosition(boostBox), CreateCollider(boostBox, 7));
+            boostChar2 = new Character(CreatePosition(boostBox2), CreateCollider(boostBox2, 7));
+            panelBox = Controls.Find("panel1", true)[0] as Panel;
+            labelBox = Controls.Find("label1", true)[0] as Label;
+            Game.player = player;
+            timeBegin = DateTime.Now;
+        }
+
+        public static FrmLevel GetInstance()
+        {
+            if (instance == null)
+            {
+                instance = new FrmLevel();
+                instance.FrmLevel_Load();
+            }
+            return instance;
         }
 
         private Vector2 CreatePosition(PictureBox pic)
