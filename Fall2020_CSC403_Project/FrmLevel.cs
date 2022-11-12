@@ -71,6 +71,51 @@ namespace Fall2020_CSC403_Project
                 walls[w] = new Character(CreatePosition(pic), CreateCollider(pic, PADDING));
             }
 
+            if (theme == "theme1")
+            {
+                boost.Location = new Point(797, 190);
+                picWall2.Size = new Size(555, 67);
+                picWall8.Location = new Point(1099, 1);
+                picWall10.Location = new Point(599, 138);
+                picWall10.Size = new Size(133, 86);
+                picWall9.Location = new Point(188, 89);
+                picWall9.Size = new Size(237, 162);
+                picWall12.Location = new Point(823, 318);
+                picEnemyCheeto.Location = new Point(1002, 89);
+                picEnemyPoisonPacket.Location = new Point(145, 499);
+                picBossKoolAid.Location = new Point(973, 454);
+                pictureBox4.Location = new Point(664, 479);
+            }
+            else if (theme == "theme2")
+            {
+                boost.Location = new Point(90, 470);
+                picWall2.Size = new Size(469, 87);
+                picWall8.Location = new Point(1093, 274);
+                picWall10.Location = new Point(653, 89);
+                picWall10.Size = new Size(228, 162);
+                picWall9.Location = new Point(216, 184);
+                picWall9.Size = new Size(197, 118);
+                picWall12.Location = new Point(890, 397);
+                picEnemyCheeto.Location = new Point(1014, 533);
+                picEnemyPoisonPacket.Location = new Point(509, 100);
+                picBossKoolAid.Location = new Point(913, 74);
+                pictureBox4.Location = new Point(739, 552);
+            }
+            else {
+                boost.Location = new Point(797, 190);
+                picWall2.Size = new Size(555, 67);
+                picWall8.Location = new Point(1099, 1);
+                picWall10.Location = new Point(599, 138);
+                picWall10.Size = new Size(133, 86);
+                picWall9.Location = new Point(188, 89);
+                picWall9.Size = new Size(237, 162);
+                picWall12.Location = new Point(823, 318);
+                picEnemyCheeto.Location = new Point(1002, 89);
+                picEnemyPoisonPacket.Location = new Point(145, 499);
+                picBossKoolAid.Location = new Point(973, 454);
+                pictureBox4.Location = new Point(664, 479);
+            }
+
             boostBox = Controls.Find("boost", true)[0] as PictureBox;
             boostBox2 = Controls.Find("pictureBox4", true)[0] as PictureBox;
             boostChar = new Character(CreatePosition(boostBox), CreateCollider(boostBox, 7));
