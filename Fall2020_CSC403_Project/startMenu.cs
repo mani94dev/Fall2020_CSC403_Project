@@ -12,9 +12,9 @@ using Fall2020_CSC403_Project.code;
 
 namespace Fall2020_CSC403_Project
 {
-    public partial class startMenu : Form
+    public partial class StartMenu : Form
     {
-        public startMenu()
+        public StartMenu()
         {
             InitializeComponent();
         }
@@ -53,6 +53,11 @@ namespace Fall2020_CSC403_Project
         }
 
         private void Exit_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void Border_Paint(object sender, PaintEventArgs e)
         {
 
         }

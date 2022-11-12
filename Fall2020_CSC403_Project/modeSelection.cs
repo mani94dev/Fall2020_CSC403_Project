@@ -35,7 +35,7 @@ namespace Fall2020_CSC403_Project
 
         private void panel1_MouseClick(object sender, MouseEventArgs e)
         {
-            startMenu start = new startMenu();
+            StartMenu start = new StartMenu();
             start.Show();
             this.Hide();
         }
