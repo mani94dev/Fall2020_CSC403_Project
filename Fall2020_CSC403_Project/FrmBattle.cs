@@ -3,6 +3,7 @@ using Fall2020_CSC403_Project.Properties;
 using System;
 using System.Drawing;
 using System.Media;
+using System.Runtime.CompilerServices;
 using System.Windows.Forms;
 
 namespace Fall2020_CSC403_Project
@@ -15,6 +16,7 @@ namespace Fall2020_CSC403_Project
         private WinScreen winScreen;
         private LoseScreen loseScreen;
         bool bossFightStarted = false;
+        int dresscode = 1;
         private FrmBattle()
         {
             InitializeComponent();
@@ -23,6 +25,7 @@ namespace Fall2020_CSC403_Project
 
         public void Setup()
         {
+            playerdress();
             // update for this enemy
             picEnemy.BackgroundImage = enemy.Img;
             picEnemy.Refresh();
@@ -50,16 +53,37 @@ namespace Fall2020_CSC403_Project
             bossFightStarted = true;
         }
 
-        public static FrmBattle GetInstance(Enemy enemy)
+        public static FrmBattle GetInstance(Enemy enemy, int dresscode)
         {
             if (instance == null)
             {
+
                 instance = new FrmBattle();
                 instance.enemy = enemy;
+                instance.dresscode = dresscode;
                 instance.Setup();
             }
             return instance;
         }
+
+
+        private void playerdress()
+        {
+            if (dresscode == 1)
+            {
+                picPlayer.BackgroundImage = Properties.Resources.newchar1;
+            }
+            else if (dresscode == 2)
+            {
+                picPlayer.BackgroundImage = Properties.Resources.newchar2;
+            }
+            else if (dresscode == 3)
+            {
+                picPlayer.BackgroundImage = Properties.Resources.player;
+            }
+
+        }
+
 
         private void UpdateHealthBars()
         {

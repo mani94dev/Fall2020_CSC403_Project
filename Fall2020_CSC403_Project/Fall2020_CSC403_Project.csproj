@@ -237,5 +237,20 @@
   <ItemGroup>
     <None Include="data\brick-Wall-2.jpg" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="data\easy.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="data\hard.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="data\medium.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="data\newchar1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="data\newchar2.jpg" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

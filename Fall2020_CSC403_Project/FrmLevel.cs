@@ -18,6 +18,7 @@ namespace Fall2020_CSC403_Project
         private Character[] walls;
         private Character boostChar;
         private Character boostChar2;
+        private ContextMenuStrip context;
 
         private DateTime timeBegin;
         private FrmBattle frmBattle;
@@ -26,8 +27,8 @@ namespace Fall2020_CSC403_Project
         PictureBox boostBox;
         PictureBox boostBox2;
         String defText = "Recent Updates are : \n";
+        private int dresscode = 1;
 
-        bool displayRestart = true;
         bool displayMenuDifficult = false;
         public String theme;
         public FrmLevel()
@@ -85,6 +86,8 @@ namespace Fall2020_CSC403_Project
                 picEnemyPoisonPacket.Location = new Point(145, 499);
                 picBossKoolAid.Location = new Point(973, 454);
                 pictureBox4.Location = new Point(664, 479);
+                SoundPlayer simpleSound = new SoundPlayer(Resources.health_consume);
+                simpleSound.Play();
             }
             else if (theme == "theme2")
             {
@@ -115,6 +118,7 @@ namespace Fall2020_CSC403_Project
                 picBossKoolAid.Location = new Point(973, 454);
                 pictureBox4.Location = new Point(664, 479);
             }
+
 
             boostBox = Controls.Find("boost", true)[0] as PictureBox;
             boostBox2 = Controls.Find("pictureBox4", true)[0] as PictureBox;
@@ -161,6 +165,56 @@ namespace Fall2020_CSC403_Project
                 }
                 walls[w] = new Character(CreatePosition(pic), CreateCollider(pic, PADDING));
             }
+
+            if (theme == "theme1")
+            {
+                boost.Location = new Point(797, 190);
+                picWall2.Size = new Size(555, 67);
+                picWall8.Location = new Point(1099, 1);
+                picWall10.Location = new Point(599, 138);
+                picWall10.Size = new Size(133, 86);
+                picWall9.Location = new Point(188, 89);
+                picWall9.Size = new Size(237, 162);
+                picWall12.Location = new Point(823, 318);
+                picEnemyCheeto.Location = new Point(1002, 89);
+                picEnemyPoisonPacket.Location = new Point(145, 499);
+                picBossKoolAid.Location = new Point(973, 454);
+                pictureBox4.Location = new Point(664, 479);
+                SoundPlayer simpleSound = new SoundPlayer(Resources.health_consume);
+                simpleSound.Play();
+
+            }
+            else if (theme == "theme2")
+            {
+                boost.Location = new Point(90, 470);
+                picWall2.Size = new Size(469, 87);
+                picWall8.Location = new Point(1093, 274);
+                picWall10.Location = new Point(653, 89);
+                picWall10.Size = new Size(228, 162);
+                picWall9.Location = new Point(216, 184);
+                picWall9.Size = new Size(197, 118);
+                picWall12.Location = new Point(890, 397);
+                picEnemyCheeto.Location = new Point(1014, 533);
+                picEnemyPoisonPacket.Location = new Point(509, 100);
+                picBossKoolAid.Location = new Point(913, 74);
+                pictureBox4.Location = new Point(739, 552);
+            }
+            else
+            {
+                boost.Location = new Point(797, 190);
+                picWall2.Size = new Size(555, 67);
+                picWall8.Location = new Point(1099, 1);
+                picWall10.Location = new Point(599, 138);
+                picWall10.Size = new Size(133, 86);
+                picWall9.Location = new Point(188, 89);
+                picWall9.Size = new Size(237, 162);
+                picWall12.Location = new Point(823, 318);
+                picEnemyCheeto.Location = new Point(1002, 89);
+                picEnemyPoisonPacket.Location = new Point(145, 499);
+                picBossKoolAid.Location = new Point(973, 454);
+                pictureBox4.Location = new Point(664, 479);
+            }
+
 
             boostBox = Controls.Find("boost", true)[0] as PictureBox;
             boostBox2 = Controls.Find("pictureBox4", true)[0] as PictureBox;
@@ -343,7 +397,7 @@ namespace Fall2020_CSC403_Project
         {
             player.ResetMoveSpeed();
             player.MoveBack();
-            frmBattle = FrmBattle.GetInstance(enemy);
+            frmBattle = FrmBattle.GetInstance(enemy,dresscode);
             frmBattle.Show();
 
             if (enemy == bossKoolaid)
@@ -356,6 +410,7 @@ namespace Fall2020_CSC403_Project
 
         private void FrmLevel_KeyDown(object sender, KeyEventArgs e)
         {
+            int PADDING = 7;
             switch (e.KeyCode)
             {
                 case Keys.Left:
@@ -374,6 +429,26 @@ namespace Fall2020_CSC403_Project
                     player.GoDown();
                     break;
 
+                case Keys.J:
+                    player.Move();
+                    player.Move();
+                    player.Move();
+                    player.Move();
+                    player.Move();
+                    player.Move();
+                    player.Move();
+                    player.Move();
+                    player.Move();
+                    player.Move();
+                    break;
+                case Keys.M:
+                    picPlayer.Size = new System.Drawing.Size(36, 65);
+                    player = new Player(CreatePosition(picPlayer), CreateCollider(picPlayer, PADDING));
+                    break;
+                case Keys.N:
+                    picPlayer.Size = new System.Drawing.Size(72, 130);
+                    player = new Player(CreatePosition(picPlayer), CreateCollider(picPlayer, PADDING));
+                    break;
                 default:
                     player.ResetMoveSpeed();
                     break;
@@ -398,34 +473,6 @@ namespace Fall2020_CSC403_Project
 
         }
 
-        private void pictureBox2_Click(object sender, EventArgs e)
-        {
-            MouseEventArgs me = (MouseEventArgs)e;
-            Point coordinates = me.Location;
-            Console.WriteLine(coordinates.X + "   " + coordinates.Y);
-            if ( coordinates.X > 62 && coordinates.X < 111 && coordinates.Y > 56 && coordinates.Y < 67)
-            {
-                // nothing to do normal gameplay using defaults
-            }
-            else if ( coordinates.X > 62 && coordinates.X < 111 && coordinates.Y > 75 && coordinates.Y < 89)
-            {
-                increaseDifficultyMedium(10);
-            }
-            else if (coordinates.X > 62 && coordinates.X < 111 &&  coordinates.Y > 97 && coordinates.Y < 111)
-            {
-
-                increaseDifficultyHard(15);
-            }
-
-            pictureBox2.Enabled = false;
-            pictureBox2.Visible = false;
-            pictureBox2.Dispose();
-            displayMenuDifficult = true;
-
-
-
-
-        }
 
         private void increaseDifficultyHard(int health)
         {
@@ -459,6 +506,54 @@ namespace Fall2020_CSC403_Project
             Close();
             
 
+        }
+
+        private void char1_Click(object sender, EventArgs e)
+        {
+            picPlayer.BackgroundImage = Resources.newchar1;
+            dresscode = 1;
+        }
+
+        private void char2_Click(object sender, EventArgs e)
+        {
+            picPlayer.BackgroundImage = Resources.newchar2;
+            dresscode = 2;
+        }
+
+        private void char3_Click(object sender, EventArgs e)
+        {
+            picPlayer.BackgroundImage = Resources.player;
+            dresscode = 3;
+        }
+
+        private void pictureBox6_Click(object sender, EventArgs e)
+        {
+            disableLevels();
+        }
+
+        private void pictureBox8_Click(object sender, EventArgs e)
+        {
+            increaseDifficultyMedium(10);
+            disableLevels();
+        }
+
+        private void pictureBox7_Click(object sender, EventArgs e)
+        {
+            increaseDifficultyHard(15);
+            disableLevels();
+        }
+
+        private void disableLevels() {
+            pictureBox6.Enabled = false;
+            pictureBox6.Visible = false;
+            pictureBox6.Dispose();
+            pictureBox8.Enabled = false;
+            pictureBox8.Visible = false;
+            pictureBox8.Dispose();
+            pictureBox7.Enabled = false;
+            pictureBox7.Visible = false;
+            pictureBox7.Dispose();
+            displayMenuDifficult = true;
         }
     }
 }
