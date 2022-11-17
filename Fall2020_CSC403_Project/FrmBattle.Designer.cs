@@ -29,10 +29,10 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.lblEnemyHealthFull = new System.Windows.Forms.Label();
+            this.tmrFinalBattle = new System.Windows.Forms.Timer(this.components);
             this.picBossBattle = new System.Windows.Forms.PictureBox();
             this.picEnemy = new System.Windows.Forms.PictureBox();
             this.picPlayer = new System.Windows.Forms.PictureBox();
-            this.tmrFinalBattle = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.picBossBattle)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picEnemy)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picPlayer)).BeginInit();
@@ -92,6 +92,11 @@
             this.lblEnemyHealthFull.Size = new System.Drawing.Size(301, 25);
             this.lblEnemyHealthFull.TabIndex = 6;
             // 
+            // tmrFinalBattle
+            // 
+            this.tmrFinalBattle.Interval = 5600;
+            this.tmrFinalBattle.Tick += new System.EventHandler(this.tmrFinalBattle_Tick);
+            // 
             // picBossBattle
             // 
             this.picBossBattle.BackgroundImage = global::Fall2020_CSC403_Project.Properties.Resources.battle_screen;
@@ -120,10 +125,9 @@
             // picPlayer
             // 
             this.picPlayer.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.picPlayer.BackgroundImage = global::Fall2020_CSC403_Project.Properties.Resources.player;
+            this.picPlayer.BackgroundImage = global::Fall2020_CSC403_Project.Properties.Resources.hero1;
             this.picPlayer.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.picPlayer.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.picPlayer.Image = global::Fall2020_CSC403_Project.Properties.Resources.hero1;
             this.picPlayer.Location = new System.Drawing.Point(93, 121);
             this.picPlayer.Margin = new System.Windows.Forms.Padding(4);
             this.picPlayer.Name = "picPlayer";
@@ -131,11 +135,6 @@
             this.picPlayer.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.picPlayer.TabIndex = 0;
             this.picPlayer.TabStop = false;
-            // 
-            // tmrFinalBattle
-            // 
-            this.tmrFinalBattle.Interval = 5600;
-            this.tmrFinalBattle.Tick += new System.EventHandler(this.tmrFinalBattle_Tick);
             // 
             // FrmBattle
             // 
