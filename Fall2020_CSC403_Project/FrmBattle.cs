@@ -3,6 +3,7 @@ using Fall2020_CSC403_Project.Properties;
 using System;
 using System.Drawing;
 using System.Media;
+using System.Reflection.Emit;
 using System.Runtime.CompilerServices;
 using System.Windows.Forms;
 
@@ -14,9 +15,11 @@ namespace Fall2020_CSC403_Project
         private Enemy enemy;
         private Player player;
         private WinScreen winScreen;
-        private LoseScreen loseScreen;
         bool bossFightStarted = false;
         int dresscode = 1;
+        public bool battleMusicOn;
+        private SoundPlayer music;
+        public FrmLevel level;
         private FrmBattle()
         {
             InitializeComponent();
@@ -46,9 +49,6 @@ namespace Fall2020_CSC403_Project
             picBossBattle.Size = ClientSize;
             picBossBattle.Visible = true;
 
-            SoundPlayer simpleSound = new SoundPlayer(Resources.final_battle);
-            simpleSound.Play();
-
             tmrFinalBattle.Enabled = true;
             bossFightStarted = true;
         }
@@ -71,15 +71,15 @@ namespace Fall2020_CSC403_Project
         {
             if (dresscode == 1)
             {
-                picPlayer.BackgroundImage = Properties.Resources.newchar1;
+                picPlayer.BackgroundImage = Resources.hero1;
             }
             else if (dresscode == 2)
             {
-                picPlayer.BackgroundImage = Properties.Resources.newchar2;
+                picPlayer.BackgroundImage = Resources.hero2;
             }
             else if (dresscode == 3)
             {
-                picPlayer.BackgroundImage = Properties.Resources.player;
+                picPlayer.BackgroundImage = Resources.hero3;
             }
 
         }
@@ -127,9 +127,13 @@ namespace Fall2020_CSC403_Project
             else if (player.Health <= 0)
             {
                 instance = null;
+                if (battleMusicOn)
+                {
+                    music.Stop();
+                }
                 Close();
-                loseScreen = new LoseScreen();
-                loseScreen.Show();
+                winScreen = new WinScreen();
+                winScreen.Show();
             }
 
         }
@@ -148,6 +152,40 @@ namespace Fall2020_CSC403_Project
         {
             picBossBattle.Visible = false;
             tmrFinalBattle.Enabled = false;
+        }
+
+        private void PlayNonBossMusic()
+        {
+            music = new SoundPlayer(Resources.NonBossTheme);
+            music.PlayLooping();
+        }
+
+        private void PlayBossMusic()
+        {
+            music = new SoundPlayer(Resources.FinalBattleTheme);
+            music.PlayLooping();
+        }
+
+
+
+        public void UpdateSettings(bool musicIsOn, bool enemyIsBoss)
+        {
+            if (musicIsOn && enemyIsBoss)
+            {
+                PlayBossMusic();
+            }
+            else if (musicIsOn)
+            {
+                PlayNonBossMusic();
+            }
+        }
+
+        private void FrmBattle_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (level.lvlMusicOn)
+            {
+                music.Stop(); //stop any music playing
+            }
         }
     }
 }

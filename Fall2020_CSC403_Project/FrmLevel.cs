@@ -19,6 +19,7 @@ namespace Fall2020_CSC403_Project
         private Character boostChar;
         private Character boostChar2;
         private ContextMenuStrip context;
+        public bool isKoolAidMan = false;
 
         private DateTime timeBegin;
         private FrmBattle frmBattle;
@@ -28,6 +29,10 @@ namespace Fall2020_CSC403_Project
         PictureBox boostBox2;
         String defText = "Recent Updates are : \n";
         private int dresscode = 1;
+        public MainMenu getMainMenu;
+
+        SoundPlayer walkSFX = new SoundPlayer(Resources.walkSound);
+        public bool lvlMusicOn;
 
         bool displayMenuDifficult = false;
         public String theme;
@@ -67,7 +72,7 @@ namespace Fall2020_CSC403_Project
                 }
                 else
                 {
-                    pic.BackgroundImage = Resources.wall;
+                    pic.BackgroundImage = Resources.brick_Wall_2;
                 }
                 walls[w] = new Character(CreatePosition(pic), CreateCollider(pic, PADDING));
             }
@@ -104,7 +109,8 @@ namespace Fall2020_CSC403_Project
                 picBossKoolAid.Location = new Point(913, 74);
                 pictureBox4.Location = new Point(739, 552);
             }
-            else {
+            else
+            {
                 boost.Location = new Point(797, 190);
                 picWall2.Size = new Size(555, 67);
                 picWall8.Location = new Point(1099, 1);
@@ -161,7 +167,7 @@ namespace Fall2020_CSC403_Project
                 }
                 else
                 {
-                    pic.BackgroundImage = Resources.wall;
+                    pic.BackgroundImage = Resources.brick_Wall_2;
                 }
                 walls[w] = new Character(CreatePosition(pic), CreateCollider(pic, PADDING));
             }
@@ -291,7 +297,8 @@ namespace Fall2020_CSC403_Project
                     labelBox.Text = defText + "Fight Against Boss";
                     Fight(bossKoolaid);
                 }
-                if (!boost.IsDisposed && picEnemyPoisonPacket.IsDisposed) {
+                if (!boost.IsDisposed && picEnemyPoisonPacket.IsDisposed)
+                {
                     boostBox.Visible = true;
                     boostBox.Enabled = true;
                 }
@@ -342,22 +349,8 @@ namespace Fall2020_CSC403_Project
                 }
 
 
-
-                //if ((enemyPoisonPacket.Health <= 0 && enemyCheeto.Health <= 0 && bossKoolaid.Health <= 0) || player.Health <= 0)
-                //{
-                //    displayRestart = false;
-                //    pictureBox1.Visible = true;
-                //    pictureBox1.Enabled = true;
-                //    pictureBox3.Visible = true;
-                //    pictureBox3.Enabled = true;
-                //}
-
             }
-         
-
-
         }
-
         private void UpdatePlayerHealth(Player player)
         {
             player.AlterHealth(12);
@@ -397,12 +390,15 @@ namespace Fall2020_CSC403_Project
         {
             player.ResetMoveSpeed();
             player.MoveBack();
-            frmBattle = FrmBattle.GetInstance(enemy,dresscode);
+            frmBattle = FrmBattle.GetInstance(enemy, dresscode);
+            frmBattle.UpdateSettings(lvlMusicOn, isKoolAidMan);
             frmBattle.Show();
 
             if (enemy == bossKoolaid)
             {
+                isKoolAidMan = true;
                 frmBattle.SetupForBossBattle();
+                frmBattle.UpdateSettings(lvlMusicOn, isKoolAidMan);
             }
 
 
@@ -449,6 +445,11 @@ namespace Fall2020_CSC403_Project
                     picPlayer.Size = new System.Drawing.Size(72, 130);
                     player = new Player(CreatePosition(picPlayer), CreateCollider(picPlayer, PADDING));
                     break;
+                case Keys.Escape:
+                    FrmPause pauseMenu = new FrmPause();
+                    pauseMenu.Show();
+                    pauseMenu.getGameLevel = this;
+                    break;
                 default:
                     player.ResetMoveSpeed();
                     break;
@@ -476,12 +477,6 @@ namespace Fall2020_CSC403_Project
 
         private void increaseDifficultyHard(int health)
         {
-            //bossKoolaid.MaxHealth =+ health;
-            //enemyCheeto.MaxHealth =+ health;
-            //enemyCheeto.MaxHealth =+ health;
-            //bossKoolaid.Health = +health;
-            //enemyCheeto.Health = +health;
-            //enemyCheeto.Health = +health;
             bossKoolaid.strength = 3;
             player.GO_INC = 2;
 
@@ -489,12 +484,6 @@ namespace Fall2020_CSC403_Project
 
         private void increaseDifficultyMedium(int health)
         {
-            //bossKoolaid.MaxHealth =+ health;
-            //enemyCheeto.MaxHealth =+ health;
-            //enemyCheeto.MaxHealth =+ health;
-            //bossKoolaid.Health = +health;
-            //enemyCheeto.Health = +health;
-            //enemyCheeto.Health = +health;
             bossKoolaid.strength = 2.5f;
             player.GO_INC = 3;
 
@@ -504,25 +493,25 @@ namespace Fall2020_CSC403_Project
         {
             label1.Text = defText + " Closing the Game";
             Close();
-            
+
 
         }
 
         private void char1_Click(object sender, EventArgs e)
         {
-            picPlayer.BackgroundImage = Resources.newchar1;
+            picPlayer.BackgroundImage = Resources.hero1;
             dresscode = 1;
         }
 
         private void char2_Click(object sender, EventArgs e)
         {
-            picPlayer.BackgroundImage = Resources.newchar2;
+            picPlayer.BackgroundImage = Resources.hero2;
             dresscode = 2;
         }
 
         private void char3_Click(object sender, EventArgs e)
         {
-            picPlayer.BackgroundImage = Resources.player;
+            picPlayer.BackgroundImage = Resources.hero3;
             dresscode = 3;
         }
 
@@ -543,7 +532,8 @@ namespace Fall2020_CSC403_Project
             disableLevels();
         }
 
-        private void disableLevels() {
+        private void disableLevels()
+        {
             pictureBox6.Enabled = false;
             pictureBox6.Visible = false;
             pictureBox6.Dispose();
@@ -555,5 +545,24 @@ namespace Fall2020_CSC403_Project
             pictureBox7.Dispose();
             displayMenuDifficult = true;
         }
+
+        public void UpdateSettings(Settings s)
+
+        {
+            if (s.maxWindow)
+            {
+                s.maximizeWindow(this);
+            }
+
+            lvlMusicOn = s.musicOn;
+        }
     }
+
+   
+
 }
+
+
+    
+
+

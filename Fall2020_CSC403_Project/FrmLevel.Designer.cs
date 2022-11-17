@@ -30,11 +30,17 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmLevel));
-            this.lblInGameTime = new System.Windows.Forms.Label();
             this.tmrUpdateInGameTime = new System.Windows.Forms.Timer(this.components);
             this.tmrPlayerMove = new System.Windows.Forms.Timer(this.components);
             this.panel1 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.soundsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.onToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.music1ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.music2ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.music3ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.offToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pictureBox8 = new System.Windows.Forms.PictureBox();
             this.pictureBox7 = new System.Windows.Forms.PictureBox();
             this.pictureBox6 = new System.Windows.Forms.PictureBox();
@@ -60,14 +66,9 @@
             this.picWall3 = new System.Windows.Forms.PictureBox();
             this.picBossKoolAid = new System.Windows.Forms.PictureBox();
             this.picPlayer = new System.Windows.Forms.PictureBox();
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.soundsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.onToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.offToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.music1ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.music2ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.music3ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.lblInGameTime = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
+            this.contextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
@@ -93,22 +94,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.picWall3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picBossKoolAid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picPlayer)).BeginInit();
-            this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // lblInGameTime
-            // 
-            this.lblInGameTime.AutoSize = true;
-            this.lblInGameTime.BackColor = System.Drawing.Color.Black;
-            this.lblInGameTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblInGameTime.ForeColor = System.Drawing.Color.White;
-            this.lblInGameTime.Location = new System.Drawing.Point(16, 11);
-            this.lblInGameTime.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblInGameTime.Name = "lblInGameTime";
-            this.lblInGameTime.Size = new System.Drawing.Size(60, 24);
-            this.lblInGameTime.TabIndex = 2;
-            this.lblInGameTime.Text = "label1";
-            this.lblInGameTime.Click += new System.EventHandler(this.lblInGameTime_Click);
             // 
             // tmrUpdateInGameTime
             // 
@@ -142,6 +128,57 @@
             this.label1.Size = new System.Drawing.Size(161, 25);
             this.label1.TabIndex = 0;
             this.label1.Text = "Select Difficulty";
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.soundsToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(127, 28);
+            // 
+            // soundsToolStripMenuItem
+            // 
+            this.soundsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.onToolStripMenuItem,
+            this.offToolStripMenuItem});
+            this.soundsToolStripMenuItem.Name = "soundsToolStripMenuItem";
+            this.soundsToolStripMenuItem.Size = new System.Drawing.Size(126, 24);
+            this.soundsToolStripMenuItem.Text = "Sounds";
+            // 
+            // onToolStripMenuItem
+            // 
+            this.onToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.music1ToolStripMenuItem,
+            this.music2ToolStripMenuItem,
+            this.music3ToolStripMenuItem});
+            this.onToolStripMenuItem.Name = "onToolStripMenuItem";
+            this.onToolStripMenuItem.Size = new System.Drawing.Size(113, 26);
+            this.onToolStripMenuItem.Text = "On";
+            // 
+            // music1ToolStripMenuItem
+            // 
+            this.music1ToolStripMenuItem.Name = "music1ToolStripMenuItem";
+            this.music1ToolStripMenuItem.Size = new System.Drawing.Size(138, 26);
+            this.music1ToolStripMenuItem.Text = "Music1";
+            // 
+            // music2ToolStripMenuItem
+            // 
+            this.music2ToolStripMenuItem.Name = "music2ToolStripMenuItem";
+            this.music2ToolStripMenuItem.Size = new System.Drawing.Size(138, 26);
+            this.music2ToolStripMenuItem.Text = "Music2";
+            // 
+            // music3ToolStripMenuItem
+            // 
+            this.music3ToolStripMenuItem.Name = "music3ToolStripMenuItem";
+            this.music3ToolStripMenuItem.Size = new System.Drawing.Size(138, 26);
+            this.music3ToolStripMenuItem.Text = "Music3";
+            // 
+            // offToolStripMenuItem
+            // 
+            this.offToolStripMenuItem.Name = "offToolStripMenuItem";
+            this.offToolStripMenuItem.Size = new System.Drawing.Size(113, 26);
+            this.offToolStripMenuItem.Text = "Off";
             // 
             // pictureBox8
             // 
@@ -178,7 +215,7 @@
             // 
             // pictureBox5
             // 
-            this.pictureBox5.Image = global::Fall2020_CSC403_Project.Properties.Resources.player;
+            this.pictureBox5.Image = global::Fall2020_CSC403_Project.Properties.Resources.hero3;
             this.pictureBox5.Location = new System.Drawing.Point(3, 342);
             this.pictureBox5.Name = "pictureBox5";
             this.pictureBox5.Size = new System.Drawing.Size(109, 92);
@@ -189,7 +226,7 @@
             // 
             // pictureBox3
             // 
-            this.pictureBox3.Image = global::Fall2020_CSC403_Project.Properties.Resources.newchar2;
+            this.pictureBox3.Image = global::Fall2020_CSC403_Project.Properties.Resources.hero2;
             this.pictureBox3.Location = new System.Drawing.Point(3, 227);
             this.pictureBox3.Name = "pictureBox3";
             this.pictureBox3.Size = new System.Drawing.Size(109, 82);
@@ -200,7 +237,7 @@
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Image = global::Fall2020_CSC403_Project.Properties.Resources.newchar1;
+            this.pictureBox1.Image = global::Fall2020_CSC403_Project.Properties.Resources.hero1;
             this.pictureBox1.Location = new System.Drawing.Point(3, 110);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(109, 86);
@@ -431,65 +468,29 @@
             // picPlayer
             // 
             this.picPlayer.BackColor = System.Drawing.Color.Transparent;
-            this.picPlayer.BackgroundImage = global::Fall2020_CSC403_Project.Properties.Resources.newchar1;
+            this.picPlayer.BackgroundImage = global::Fall2020_CSC403_Project.Properties.Resources.hero1;
             this.picPlayer.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.picPlayer.Location = new System.Drawing.Point(159, 304);
             this.picPlayer.Margin = new System.Windows.Forms.Padding(4);
             this.picPlayer.Name = "picPlayer";
             this.picPlayer.Size = new System.Drawing.Size(72, 130);
+            this.picPlayer.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.picPlayer.TabIndex = 0;
             this.picPlayer.TabStop = false;
             // 
-            // contextMenuStrip1
+            // lblInGameTime
             // 
-            this.contextMenuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.soundsToolStripMenuItem});
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(127, 28);
-            // 
-            // soundsToolStripMenuItem
-            // 
-            this.soundsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.onToolStripMenuItem,
-            this.offToolStripMenuItem});
-            this.soundsToolStripMenuItem.Name = "soundsToolStripMenuItem";
-            this.soundsToolStripMenuItem.Size = new System.Drawing.Size(210, 24);
-            this.soundsToolStripMenuItem.Text = "Sounds";
-            // 
-            // onToolStripMenuItem
-            // 
-            this.onToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.music1ToolStripMenuItem,
-            this.music2ToolStripMenuItem,
-            this.music3ToolStripMenuItem});
-            this.onToolStripMenuItem.Name = "onToolStripMenuItem";
-            this.onToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
-            this.onToolStripMenuItem.Text = "On";
-            // 
-            // offToolStripMenuItem
-            // 
-            this.offToolStripMenuItem.Name = "offToolStripMenuItem";
-            this.offToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
-            this.offToolStripMenuItem.Text = "Off";
-            // 
-            // music1ToolStripMenuItem
-            // 
-            this.music1ToolStripMenuItem.Name = "music1ToolStripMenuItem";
-            this.music1ToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
-            this.music1ToolStripMenuItem.Text = "Music1";
-            // 
-            // music2ToolStripMenuItem
-            // 
-            this.music2ToolStripMenuItem.Name = "music2ToolStripMenuItem";
-            this.music2ToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
-            this.music2ToolStripMenuItem.Text = "Music2";
-            // 
-            // music3ToolStripMenuItem
-            // 
-            this.music3ToolStripMenuItem.Name = "music3ToolStripMenuItem";
-            this.music3ToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
-            this.music3ToolStripMenuItem.Text = "Music3";
+            this.lblInGameTime.AutoSize = true;
+            this.lblInGameTime.BackColor = System.Drawing.Color.Black;
+            this.lblInGameTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblInGameTime.ForeColor = System.Drawing.Color.White;
+            this.lblInGameTime.Location = new System.Drawing.Point(16, 11);
+            this.lblInGameTime.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblInGameTime.Name = "lblInGameTime";
+            this.lblInGameTime.Size = new System.Drawing.Size(60, 24);
+            this.lblInGameTime.TabIndex = 2;
+            this.lblInGameTime.Text = "label1";
+            this.lblInGameTime.Click += new System.EventHandler(this.lblInGameTime_Click);
             // 
             // FrmLevel
             // 
@@ -536,6 +537,7 @@
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.FrmLevel_KeyUp);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            this.contextMenuStrip1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
@@ -561,7 +563,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.picWall3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picBossKoolAid)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picPlayer)).EndInit();
-            this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -571,7 +572,6 @@
 
         private System.Windows.Forms.PictureBox picPlayer;
         private System.Windows.Forms.PictureBox picBossKoolAid;
-        private System.Windows.Forms.Label lblInGameTime;
         private System.Windows.Forms.Timer tmrUpdateInGameTime;
         private System.Windows.Forms.Timer tmrPlayerMove;
         private System.Windows.Forms.PictureBox picWall3;
@@ -606,6 +606,7 @@
         private System.Windows.Forms.ToolStripMenuItem music2ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem offToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem music3ToolStripMenuItem;
+        private System.Windows.Forms.Label lblInGameTime;
     }
 }
 
