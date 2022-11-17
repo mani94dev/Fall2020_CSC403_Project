@@ -205,7 +205,7 @@
             // pictureBox6
             // 
             this.pictureBox6.Image = global::Fall2020_CSC403_Project.Properties.Resources.easy;
-            this.pictureBox6.Location = new System.Drawing.Point(431, 342);
+            this.pictureBox6.Location = new System.Drawing.Point(422, 342);
             this.pictureBox6.Name = "pictureBox6";
             this.pictureBox6.Size = new System.Drawing.Size(204, 118);
             this.pictureBox6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
